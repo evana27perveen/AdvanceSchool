@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Take Attendance
+{% endblock %}
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+        {#border: 1px solid #ddd;#} text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            color: white;
+        }
+
+
+        form select {
+            background-color: #020318 !important;
+            color: white;
+            width: 100px;
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+        form select option {
+            color: white;
+        }
+
+        /*responsive*/
+    </style>
+{% endblock %}
+{% block group_name %}
+    Teacher
+{% endblock %}
+{% block body %}
+    <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title_for_routine"><a href=""
+                                                               style="text-decoration: none; color: white"><b>{{ date }}</b></a>
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 1%">
+                <div class="neon__card">
+                    <div class="container">
+                        <table class="table" style="color: white;  height: fit-content;">
+                            <h2 class="neon__title"
+                                style="text-align: center; color: white;margin-top: 5px;">{{ subject }}</h2>
+                            <hr style="color: white">
+                            <hr style="color: white">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th style="float: right;">Attendance</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td data-label="ID">{{ student.student_id }}</td>
+                                    <td data-label="Attendance" style="text-align: right">
+                                        <button type="button" value="{{ student.student_id }}"
+                                                id="id-{{ student.student_id }}" class="neon__button"
+                                                style="color: white; height: 37px!important; width: fit-content!important; padding-top: 0!important; float: right; font-size: 20px">
+                                            ✓
+                                        </button>
+                                        <script>
+                                            document.getElementById("id-{{ student.student_id }}").addEventListener("click", input_add);
+
+                                            function input_add() {
+                                                let p_id = document.getElementById("all-ids");
+                                                if (document.getElementById("in-{{ student.student_id }}")) {
+                                                    p_id.innerText = p_id.innerText.replace(/{{ student.student_id }}, /g, "");
+                                                    document.getElementById("in-{{ student.student_id }}").remove();
+                                                    document.getElementById("id-{{ student.student_id }}").innerText = '✓';
+                                                    let val = document.getElementById("all-ids");
+                                                    document.getElementById('list').value = val.innerText;
+                                                } else {
+                                                    document.getElementById("id-{{ student.student_id }}").innerText = '☓';
+                                                    p_id.innerText += "{{ student.student_id }}, ";
+                                                    document.getElementById("hidden").innerHTML += '<input type="hidden" name="{{ student.student_id }}" id="in-{{ student.student_id }}" value="{{ student.student_id }}">';
+                                                    let val = document.getElementById("all-ids");
+                                                    document.getElementById('list').value = val.innerText;
+                                                }
+                                            }
+                                        </script>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <form method="post" class="form-group">
+                            {% csrf_token %}
+                            <p id="all-ids" style="display: none"></p>
+                            <div style="display: none">
+                                <fieldset class="form-group" id="hidden">
+                                    <input type="text" value="" name="all_ids" id="list">
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <button style="width: 100%" type="submit" class="neon__button">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+{% endblock %}

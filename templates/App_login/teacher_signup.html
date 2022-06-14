@@ -1,0 +1,115 @@
+{% extends 'admins/dashboard.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Teacher-Signup
+{% endblock %}
+
+{% block body %}
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to right top, #040409, #090526);
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            padding: 10vh 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            position: center;
+        }
+
+        .form {
+            width: fit-content;
+            height: fit-content;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            padding-left: 10%;
+            padding-right: 10%;
+            background-color: rgb(230, 230, 230);
+            border: rgb(255, 255, 255) 3px solid;
+            border-radius: 0px 50px 0px 50px;
+            box-shadow: 15px 15px 20px 5px rgba(119, 119, 119, 0.3),
+            -15px -15px 20px 5px rgba(255, 255, 255, 0.8),
+            inset 5px 5px 20px 5px rgba(119, 119, 119, 0.3),
+            inset -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .top-text, .submit {
+            display: block;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            outline: none;
+        }
+
+        .top-text {
+            font-size: 20px;
+        }
+
+        #id_username, #id_password, #id_first_name, #id_last_name, #id_email, #id_password1, #id_password2, #id_phone_number, #id_address, #id_gender, #id_designation, #id_department, #id_teacher_id, #id_salary {
+            font-size: 15px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: rgb(233, 231, 231);
+            width: 350px;
+            border-radius: 30px;
+            border: solid 3px rgb(255, 255, 255);
+            box-shadow: inset 10px 10px 20px 0px rgba(119, 119, 119, 0.3),
+            inset -10px -10px 20px 0px rgba(255, 255, 255, 0.8),
+            15px 15px 20px 5px rgba(119, 119, 119, 0.3),
+            -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
+            text-align: left;
+        }
+
+        .submit {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20px;
+            padding: 8px 15px;
+            margin-top: 50px;
+            background-color: rgb(233, 231, 231);
+            transition: 0.5s;
+            border: solid 3px rgba(255, 255, 255, 0);
+            border-radius: 30px;
+            color: rgb(0, 0, 0);
+            text-shadow: 0 0 1px rgb(68, 68, 68);
+        }
+
+        .submit:hover {
+            border: solid 3px rgb(255, 255, 255);
+            box-shadow: 15px 15px 20px 5px rgba(119, 119, 119, 0.3),
+            -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
+        }
+
+
+    </style>
+
+    <div class="main" STYLE="margin-left: 10%">
+        <form method="post" enctype="multipart/form-data" class="form">
+            <legend class="top-text"><b>Register New Teacher</b></legend>
+            {% csrf_token %}
+            {{ form1|crispy }}
+            {{ form2|crispy }}
+            <input type="submit" class="submit" value="Submit">
+        </form>
+    </div>
+
+
+{% endblock %}

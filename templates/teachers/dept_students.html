@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Students
+{% endblock %}
+
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+            {#border: 1px solid #ddd;#}
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+          color: white;
+        }
+
+        /*responsive*/
+
+        @media (max-width: 500px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+            }
+
+            .table td {
+                padding-left: 50%;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
+{% endblock %}
+{% block group_name %}
+Teacher
+{% endblock %}
+
+{% block body %}
+    <article style="background-color:#020318;  height: fit-content; overflow-x: hidden">
+        <div class="container">
+            <table class="table" style="color: white;  height: fit-content;">
+                <thead class="thead-dark">
+                <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Department</th>
+                <th>Contact No.</th>
+                <th>Status</th>
+                <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                    <tr>
+                    <td data-label="ID">{{ student.student_id }}</td>
+                    <td data-label="Name">{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                    <td data-label="Batch">{{ student.batch }}</td>
+                    <td data-label="Department">{{ student.department }}</td>
+                    <td data-label="Contact No.">{{ student.phone_number }}</td>
+                    {% if student.status == True %}
+                        <td data-label="Status">Active</td>
+                    <td data-label="Action"><a class="neon__button_for_disable" style="text-decoration: none; color: white" href="{% url 'App_main:student-disable' k=student.id %}">Disable</a></td>
+                    {% else %}
+                        <td data-label="Status">Disabled</td>
+                    <td data-label="Action"><a class="neon__button_for_disable" style="text-decoration: none; color: white" href="{% url 'App_main:student-activate' k=student.id %}">Activate</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+{% endblock %}

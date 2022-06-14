@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Assignments Submissions
+{% endblock %}
+
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+        {#border: 1px solid #ddd;#} text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            color: white;
+        }
+
+        /*responsive*/
+
+        @media (max-width: 500px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+            }
+
+            .table td {
+                padding-left: 50%;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td a {
+                margin-left: auto;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
+{% endblock %}
+{% block group_name %}
+    Teacher
+{% endblock %}
+
+{% block body %}
+    <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Assignments</b></a>
+
+                            <a href="{% url 'App_main:new-assignment' %}" style="color: white; float: right">
+                                <i class="fa fa-plus" style="font-size:35px;color:white"></i>
+                            </a></h1>
+                    </div>
+                </div>
+            </div>
+            {% for assignment in assignments %}
+                <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">{{ assignment|join:',' }} </h2>
+                                <a class="neon__button" style="float: right; margin-bottom: 1%"
+                                   href="{% url 'App_main:delete-assignment' pk=assignment|join:',' %}"><i
+                                        class="fa fa-trash-o" style="font-size:15px;color:white"></i></a>
+                                <hr style="color: white">
+                                <hr style="color: white">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Deadline</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Batch</th>
+                                    <th>Department</th>
+                                    <th>Section</th>
+                                    <th>File</th>
+                                    <th>Submitted</th>
+                                    <th>Marks</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for submission in submissions %}
+                                    {% if submission.my_assignment.Title == assignment|join:',' %}
+                                        <tr>
+                                            <td data-label="Deadline">{{ submission.my_assignment.deadline }}</td>
+                                            <td data-label="ID">{{ submission.submitted_by.student_id }}</td>
+                                            <td data-label="Name">{{ submission.submitted_by.user.first_name }} {{ submission.submitted_by.user.last_name }}</td>
+                                            <td data-label="Batch">{{ submission.submitted_by.batch }}</td>
+                                            <td data-label="Department">{{ submission.submitted_by.department }}</td>
+                                            <td data-label="Section">{{ submission.submitted_by.section }}</td>
+                                            <td data-label="Submitted File"><a class="neon__button"
+                                                                               style="color: white; height: 37px!important; width: fit-content!important; padding-top: 9%!important;"
+                                                                               href="http://
+
+
+
+                                                                                       {{ request.META.HTTP_HOST }}{{ submission.submission_file.url }}">Open</a>
+                                            </td>
+                                            <td data-label="Submitted On">{{ submission.created }}</td>
+
+                                            <form method="post"
+                                                  action="{% url 'App_main:update-assign-mark' pk=submission.id %}">
+                                                {% csrf_token %}
+                                                <td data-label="Marks">
+                                                    <input name="marks" value="{{ submission.marks }}"
+                                                           style="height: 30px; width: 27px; border-radius: 25%; border: 2px solid #77778d; background-color: #020318; color: white">
+                                                </td>
+                                                <td>
+                                                    <button type="submit" value="Submit" class="neon__button"
+                                                            style="color: white; height: 37px!important; width: fit-content!important; padding-top: 0!important;">
+                                                        <i class="fa fa-check" style="font-size:30px; color: white"></i>
+                                                    </button>
+                                                </td>
+                                            </form>
+
+
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </article>
+
+
+{% endblock %}
