@@ -1,31 +1,16 @@
-{% extends 'admins/dashboard.html' %}
+{% extends 'admins/base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
     Teacher-Signup
 {% endblock %}
 
+
 {% block body %}
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
         @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: linear-gradient(to right top, #040409, #090526);
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            padding: 10vh 0;
-        }
 
         * {
             box-sizing: border-box;
@@ -33,15 +18,14 @@
 
         .container {
             position: center;
+            text-align: center;
         }
 
         .form {
+            color: #02052d !important;
             width: fit-content;
             height: fit-content;
-            padding-top: 5%;
-            padding-bottom: 5%;
-            padding-left: 10%;
-            padding-right: 10%;
+            padding: 5% 10%;
             background-color: rgb(230, 230, 230);
             border: rgb(255, 255, 255) 3px solid;
             border-radius: 0px 50px 0px 50px;
@@ -51,20 +35,24 @@
             inset -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
         }
 
+
         .top-text, .submit {
             display: block;
             text-align: center;
             margin-left: auto;
             margin-right: auto;
             outline: none;
+            color: #02052d !important;
         }
 
         .top-text {
             font-size: 20px;
+            color: #02052d !important;
         }
 
-        #id_username, #id_password, #id_first_name, #id_last_name, #id_email, #id_password1, #id_password2, #id_phone_number, #id_address, #id_gender, #id_designation, #id_department, #id_teacher_id, #id_salary {
+        input, select {
             font-size: 15px;
+            color: #02052d !important;
             margin-top: 3px;
             margin-bottom: 10px;
             padding: 15px;
@@ -93,23 +81,65 @@
         }
 
         .submit:hover {
-            border: solid 3px rgb(255, 255, 255);
+            color: #02052d !important;
+            border: solid 3px rgb(2, 5, 45);
             box-shadow: 15px 15px 20px 5px rgba(119, 119, 119, 0.3),
             -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
+        }
+
+        #div_id_password1 ul li {
+            display: none;
+        }
+
+        {#media screen#}
+        @media screen and (max-width: 550px) {
+            .container {
+                margin-left: 3% !important;
+                padding-left: 3% !important;
+            }
+
+            body {
+                width: 100% !important;
+            }
+
+            .form {
+                width: 95% !important;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            #id_test_paper, .submit {
+                width: 100%;
+            }
+
+
+        }
+
+        /* For long screens */
+        @media screen and (min-width: 1024px) {
+
         }
 
 
     </style>
 
-    <div class="main" STYLE="margin-left: 10%">
-        <form method="post" enctype="multipart/form-data" class="form">
+    <div class="container" style="text-align: center; width: 1000px; height: fit-content">
+        <div class="container" STYLE="margin-left: 10%">
+            <form method="post" enctype="multipart/form-data" class="form">
             <legend class="top-text"><b>Register New Teacher</b></legend>
             {% csrf_token %}
             {{ form1|crispy }}
             {{ form2|crispy }}
             <input type="submit" class="submit" value="Submit">
         </form>
+        </div>
+
     </div>
 
 
+    <script>
+        document.getElementById('id_deadline').setAttribute('type', 'datetime-local');
+        document.getElementById('id_starting_time').setAttribute('type', 'datetime-local');
+        document.getElementById('id_starting_time').setAttribute('type', 'datetime-local');
+    </script>
 {% endblock %}

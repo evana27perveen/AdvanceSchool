@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'parents/base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
@@ -73,9 +73,7 @@
 
     </style>
 {% endblock %}
-{% block group_name %}
-    Teacher
-{% endblock %}
+
 
 {% block body %}
     <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
@@ -99,9 +97,6 @@
                             <table class="table" style="color: white;  height: fit-content;">
                                 <h2 class="neon__title"
                                     style="text-align: center; color: white;margin-top: 5px;">{{ test }} </h2>
-                                <a class="neon__button" style="float: right; margin-bottom: 1%"
-                                   href="{% url 'App_main:delete-test' pk=test %}"><i
-                                        class="fa fa-trash-o" style="font-size:15px;color:white"></i></a>
                                 <hr style="color: white">
                                 <hr style="color: white">
                                 <thead class="thead-dark">

@@ -1,0 +1,266 @@
+{% extends 'accountants/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Salary List
+{% endblock %}
+
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+        {#border: 1px solid #ddd;#} text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            color: white;
+        }
+
+        /*responsive*/
+
+        @media (max-width: 500px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+            }
+
+            .table td {
+                padding-left: 50%;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td a {
+                margin-left: auto;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Salary
+                            Record</b></a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 1%">
+                <div class="neon__card">
+
+                    <div class="container">
+                        <table class="table" style="color: white;  height: fit-content;">
+                            <h2 class="neon__title"
+                                style="text-align: center; color: white;margin-top: 5px;">Admins</h2>
+                            <hr style="color: white">
+                            <hr style="color: white">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Joining Date</th>
+                                <th>Salary</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for salary in salaries %}
+                                {% if salary.position == 'Admin' %}
+                                    <tr>
+                                        <td data-label="Name"><a href="{% url 'App_main:accountant-each-salary-record' pk=salary.user_id %}">{{ salary.user.first_name }} {{ salary.user.last_name }}</a></td>
+                                        <td data-label="Joining Date">{{ salary.created }} </td>
+                                        <td data-label="Salary">{{ salary.salary }} BDT</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">Teachers</h2>
+                                <hr style="color: white">
+                                <hr style="color: white">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Joining Date</th>
+                                    <th>Salary</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for salary in salaries %}
+                                    {% if salary.position == 'Teacher' %}
+                                        <tr>
+                                            <td data-label="Name"><a href="{% url 'App_main:accountant-each-salary-record' pk=salary.user_id %}">{{ salary.user.first_name }} {{ salary.user.last_name }}</a></td>
+                                            <td data-label="Joining Date">{{ salary.created }} </td>
+                                            <td data-label="Salary">{{ salary.salary }} BDT</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">Accountants</h2>
+                                <hr style="color: white">
+                                <hr style="color: white">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Joining Date</th>
+                                    <th>Salary</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for salary in salaries %}
+                                    {% if salary.position == 'Accountant' %}
+                                        <tr>
+                                            <td data-label="Name"><a href="{% url 'App_main:accountant-each-salary-record' pk=salary.user_id %}">{{ salary.user.first_name }} {{ salary.user.last_name }}</a></td>
+                                            <td data-label="Joining Date">{{ salary.created }} </td>
+                                            <td data-label="Salary">{{ salary.salary }} BDT</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+        <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">Librarians</h2>
+                                <hr style="color: white">
+                                <hr style="color: white">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Joining Date</th>
+                                    <th>Salary</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for salary in salaries %}
+                                    {% if salary.position == 'Librarian' %}
+                                        <tr>
+                                            <td data-label="Name"><a href="{% url 'App_main:accountant-each-salary-record' pk=salary.user_id %}">{{ salary.user.first_name }} {{ salary.user.last_name }}</a></td>
+                                            <td data-label="Joining Date">{{ salary.created }} </td>
+                                            <td data-label="Salary">{{ salary.salary }} BDT</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+        <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">Staff</h2>
+                                <hr style="color: white">
+                                <hr style="color: white">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Joining Date</th>
+                                    <th>Salary</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for salary in salaries %}
+                                    {% if salary.position == 'Staff' %}
+                                        <tr>
+                                            <td data-label="Name"><a href="{% url 'App_main:accountant-each-salary-record' pk=salary.user_id %}">{{ salary.user.first_name }} {{ salary.user.last_name }}</a></td>
+                                            <td data-label="Joining Date">{{ salary.created }} </td>
+                                            <td data-label="Salary">{{ salary.salary }} BDT</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+        </div>
+    </article>
+
+
+{% endblock %}

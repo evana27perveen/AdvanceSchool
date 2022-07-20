@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'students/student_base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="neon__card_for_month" style="margin: 5px">
-                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Tests</b></a>
+                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Merit List</b></a>
                         </h1>
                     </div>
                 </div>
@@ -99,15 +99,11 @@
                             <table class="table" style="color: white;  height: fit-content;">
                                 <h2 class="neon__title"
                                     style="text-align: center; color: white;margin-top: 5px;">{{ test }} </h2>
-                                <a class="neon__button" style="float: right; margin-bottom: 1%"
-                                   href="{% url 'App_main:delete-test' pk=test %}"><i
-                                        class="fa fa-trash-o" style="font-size:15px;color:white"></i></a>
                                 <hr style="color: white">
                                 <hr style="color: white">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Class</th>
-                                    <th>Subject</th>
+                                    <th>Class-I'd</th>
                                     <th>Name</th>
                                     <th>Marks</th>
                                     <th>Position</th>
@@ -117,8 +113,7 @@
                                 {% for submission in submissions %}
                                     {% if submission.my_test.Title == test %}
                                         <tr>
-                                            <td data-label="Class">{{ submission.identify }}</td>
-                                            <td data-label="Subject">{{ submission.my_test.subject }}</td>
+                                            <td data-label="Class-I'd">{{ submission.identify }}</td>
                                             <td data-label="Name">{{ submission.submitted_by.user.first_name }} {{ submission.submitted_by.user.last_name }}</td>
                                             <td data-label="Marks">{{ submission.marks }}</td>
                                             <td data-label="Position"><p id="p_id_{{ t_id }}_{{ submission.id }}"><span>0</span><span></span></p></td>

@@ -1,0 +1,57 @@
+{% extends 'students/student_base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Borrowed Books
+{% endblock %}
+
+{% block body %}
+    <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row" style="margin: 1%">
+                <div class="neon__card">
+                    <div class="container">
+                        <table class="table" style="color: white;  height: fit-content;">
+                            <h2 class="neon__title"
+                                style="text-align: center; color: white;margin-top: 5px;">Borrowed Books to return</h2>
+                            <hr style="color: white">
+                            <hr style="color: white">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Book</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Date</th>
+                                <th>Status</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for borrow in borrows %}
+                                <tr>
+                                    <td data-label="Book">{{ borrow.book.title }}</td>
+                                    <td data-label="Author">{{ borrow.book.author }}</td>
+                                    <td data-label="Category">{{ borrow.book.categories }}</td>
+                                    <td data-label="Quantity">{{ borrow.quantity }}</td>
+                                    <td data-label="Date">{{ borrow.date.day }}-{{ borrow.date|date:'F' }}-{{ borrow.date.year }}</td>
+                                    {% if borrow.status %}
+                                        <td data-label="Status">Borrowed</td>
+                                    {% else %}
+                                        <td data-label="Status">Returned</td>
+                                    {% endif %}
+                                </tr>
+                                <hr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </article>
+{% endblock %}

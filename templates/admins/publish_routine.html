@@ -2,9 +2,12 @@
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
-    Librarian-Signup
+    New Routine
 {% endblock %}
 
+{% block style %}
+
+{% endblock %}
 
 {% block body %}
     <style>
@@ -87,10 +90,6 @@
             -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
         }
 
-        #div_id_password1 ul li {
-            display: none;
-        }
-
         {#media screen#}
         @media screen and (max-width: 550px) {
             .container {
@@ -126,12 +125,11 @@
     <div class="container" style="text-align: center; width: 1000px; height: fit-content">
         <div class="container" STYLE="margin-left: 10%">
             <form method="post" enctype="multipart/form-data" class="form">
-            <legend class="top-text"><b>Register New Librarian</b></legend>
-            {% csrf_token %}
-            {{ form1|crispy }}
-            {{ form2|crispy }}
-            <input type="submit" class="submit" value="Submit">
-        </form>
+                <legend class="top-text"><b>New Routine</b></legend>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="submit" value="Submit">
+            </form>
         </div>
 
     </div>

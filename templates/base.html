@@ -1045,22 +1045,22 @@
                 </a>
             </li>
             <li class="menu-heading">
-                <h3>Settings</h3>
+                <h3>Salary: {{ month }}</h3>
             </li>
-            <li>
-                <a href="#0">
-                    <svg>
-                        <use xlink:href="#options"></use>
-                    </svg>
-                    <span>Settings</span>
-                </a>
-            </li>
+{#            <li>#}
+{#                <a href="#0">#}
+{#                    <svg>#}
+{#                        <use xlink:href="#options"></use>#}
+{#                    </svg>#}
+{#                    <span>Settings</span>#}
+{#                </a>#}
+{#            </li>#}
             <li>
                 <a href="#0">
                     <svg>
                         <use xlink:href="#settings"></use>
                     </svg>
-                    <span>Options</span>
+                    <span>{{ my_salary }}</span>
                 </a>
             </li>
             <li>
@@ -1075,24 +1075,22 @@
                 </a>
             </li>
             <li>
-                <div class="switch">
-                    <input type="checkbox" id="mode" checked>
-                    <label for="mode">
-                        <span></span>
-                        <span>Dark</span>
-                    </label>
-                </div>
-                <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-                    <svg aria-hidden="true">
-                        <use xlink:href="#collapse"></use>
-                    </svg>
-                    <span>Collapse</span>
-                </button>
+{#                <div class="switch">#}
+{#                    <input type="checkbox" id="mode" checked>#}
+{#                    <label for="mode">#}
+{#                        <span></span>#}
+{#                        <span>Dark</span>#}
+{#                    </label>#}
+{#                </div>#}
+
             </li>
         </ul>
     </nav>
 </header>
 {% block space %}
+    {% block sec %}
+
+    {% endblock %}
 
     <section class="page-content">
         <section class="grid">

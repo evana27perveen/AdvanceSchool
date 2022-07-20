@@ -1,10 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'librarians/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Librarian-Dashboard
+{% endblock %}
+{% block sec %}
+    <section class="grid">
+        <article
+                style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px; padding-left: 20%!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="neon__card_for_month" style="margin: 5px">
+                            <a href="" style="text-decoration: none; color: white"><img
+                                    src="{{ profile.profile_picture.url }}" width="250px" height="340px"></a>
+                        </div>
+                    </div>
 
-</body>
-</html>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="neon__card_for_month" style="margin: 5px">
+                                    <h1 class="neon__title"><b> {{ date }} </b></h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" style="margin: 5px; color: white;">
+                            <h1 class="neon__title_for_routine">
+                                <b>{{ profile.user.first_name }} {{ profile.user.last_name }}</b></h1>
+                            <hr>
+                            <hr>
+                            <div class="row">
+                                <h1 style="font-size: 14px; float: left!important;">
+                                    Address: {{ profile.address }}</h1>
+                            </div>
+                            <div class="row">
+                                <h1 style="font-size: 14px; float: left!important;">
+                                    Gender: {{ profile.gender }}</h1>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <h1 style="font-size: 14px; float: left!important;">
+                                    Contact: {{ profile.phone_number }}</h1>
+                            </div>
+                            <div class="row">
+                                <h1 style="font-size: 14px; float: left!important;">
+                                    Email: {{ profile.user.email }}</h1>
+                            </div>
+                            <hr>
+                            <hr>
+                            <div class="row">
+                                <h1 style="font-size: 14px; float: left!important;">Working
+                                    period: {{ profile.joining_date }} - Present</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </section>
+{% endblock %}
+
+{% block body %}
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---:---:---: || Books || :---:---:---:---:---</b></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:book-category' %}" style="color: white">
+                            <h3 class="neon__title_for_date">Book Categories</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:book-location' %}" style="color: white">
+                            <h3 class="neon__title_for_date">Book locations</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:all-book' %}" style="color: white">
+                            <h3 class="neon__title_for_date">All Books</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:borrowed-books' %}" style="color: white">
+                            <h3 class="neon__title_for_date">Borrowed Books</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:all-borrows' %}" style="color: white">
+                            <h3 class="neon__title_for_date">Borrow Records</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:librarian-all-notices' %}" style="color: white"><h3 class="neon__title_for_date">
+                            Announcements</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+{% endblock %}

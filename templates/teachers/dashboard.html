@@ -5,177 +5,275 @@
     Teacher-Dashboard
 {% endblock %}
 {% block group_name %}
-Teacher
+    Teacher
 {% endblock %}
+
+{% block sec %}
+        <section class="grid">
+            <article
+                    style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px; padding-left: 20%!important;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="neon__card_for_month" style="margin: 5px">
+                                <a href="" style="text-decoration: none; color: white"><img
+                                        src="{{ profile.profile_picture.url }}" width="250px" height="340px"></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="neon__card_for_month" style="margin: 5px">
+                                        <h1 class="neon__title"><b> {{ date }} </b></h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="margin: 5px; color: white;">
+                                <h1 class="neon__title_for_routine">
+                                    <b>{{ profile.user.first_name }} {{ profile.user.last_name }} ({{ profile.designation }})</b></h1>
+                                <hr>
+                                <hr>
+                                <div class="row">
+                                    <h1 style="font-size: 14px; float: left!important;">
+                                        Address: {{ profile.address }}</h1>
+                                </div>
+                                <div class="row">
+                                    <h1 style="font-size: 14px; float: left!important;">
+                                        Gender: {{ profile.gender }}</h1>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <h1 style="font-size: 14px; float: left!important;">
+                                        Contact: {{ profile.phone_number }}</h1>
+                                </div>
+                                <div class="row">
+                                    <h1 style="font-size: 14px; float: left!important;">
+                                        Email: {{ profile.user.email }}</h1>
+                                </div>
+                                <hr>
+                                <hr>
+                                <div class="row">
+                                    <h1 style="font-size: 14px; float: left!important;">Working
+                                        period: {{ profile.joining_date }} - Present</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+        </section>
+{% endblock %}
+
 {% block body %}
     <article
-                    style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="" style="text-decoration: none; color: white"><h1 class="neon__title_for_routine"><b>All Students - ({{ all_students }})</b></h1></a>
-                            </div>
-                        </div>
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="" style="text-decoration: none; color: white"><h1 class="neon__title_for_routine"><b>All
+                            Students - ({{ all_students }})</b></h1></a>
                     </div>
-                    <div class="row">
-                        {% for batch in batch_list %}
-
-                        <div class="col-lg-4">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                    <h1 class="neon__title_for_routine"><b>Batch-{{ batch|join:", " }}</b></h1>
-                                <hr>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-4"><a style="color: white" href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='cse' %}" class="neon__button"><h1 class="neon__title_for_date">CSE</h1></a>
-                                </div>
-                                    <div class="col-lg-4"><a style="color: white" href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='bba' %}" class="neon__button"><h1 class="neon__title_for_date">BBA</h1></a>
-                                </div>
-                                    <div class="col-lg-4"><a style="color: white" href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='bthm' %}" class="neon__button"><h1 class="neon__title_for_date">BTHM</h1></a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% endfor %}
-                        {% for batch in batch_list %}
-
-                        <div class="col-lg-4">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                    <h1 class="neon__title_for_routine"><b>Batch-{{ batch|join:", " }}</b></h1>
-                                <hr>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">CSE</h1></button>
-                                </div>
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">BBA</h1></button>
-                                </div>
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">BTHM</h1></button></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% endfor %}
-                        {% for batch in batch_list %}
-
-                        <div class="col-lg-4">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                    <h1 class="neon__title_for_routine"><b>Batch-{{ batch|join:", " }}</b></h1>
-                                <hr>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">CSE</h1></button>
-                                </div>
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">BBA</h1></button>
-                                </div>
-                                    <div class="col-lg-4"><button class="neon__button"><h1 class="neon__title_for_date">BTHM</h1></button></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% endfor %}
-                    </div>
-
                 </div>
-            </article>
+            </div>
+            <div class="row">
+                {% for batch in batch_list %}
+
+                    <div class="col-lg-4">
+                        <div class="neon__card_for_month" style="margin: 5px">
+                            <h1 class="neon__title_for_routine"><b>Batch-{{ batch|join:", " }}</b></h1>
+                            <hr>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-4"><a style="color: white"
+                                                         href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='cse' %}"
+                                                         class="neon__button"><h1 class="neon__title_for_date">CSE</h1>
+                                </a>
+                                </div>
+                                <div class="col-lg-4"><a style="color: white"
+                                                         href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='bba' %}"
+                                                         class="neon__button"><h1 class="neon__title_for_date">BBA</h1>
+                                </a>
+                                </div>
+                                <div class="col-lg-4"><a style="color: white"
+                                                         href="{% url 'App_main:specific-dept-students' pk=batch|join:',' dept='bthm' %}"
+                                                         class="neon__button"><h1 class="neon__title_for_date">BTHM</h1>
+                                </a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </article>
     <article
-                    style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <h1 class="neon__title"><b>---:---: {{ date }} :---:---</b></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:new-assignment' %}" style="color: white"><h3 class="neon__title_for_date">New Assignment</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:assignment-submissions' %}" style="color: white"><h3 class="neon__title_for_date">Submitted Assignments</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:assignment-submissions' %}" style="color: white"><h3 class="neon__title_for_date">Assignment Marks</h3></a>
-                            </div>
-                        </div>
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---:---: || Assignments || :---:---:---:---</b></h1>
                     </div>
                 </div>
-            </article>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:new-assignment' %}" style="color: white"><h3
+                                class="neon__title_for_date">New Assignment</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:assignment-submissions' %}" style="color: white"><h3
+                                class="neon__title_for_date">Submitted Assignments</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:assignment-submissions' %}" style="color: white"><h3
+                                class="neon__title_for_date">Assignment Marks</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
     <article
-                    style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <h1 class="neon__title"><b>---:---:---:---: || Attendance || :---:---:---:---</b></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:take-attendance' %}" style="color: white"><h3 class="neon__title_for_date">Take Attendance</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:batch-based-attendance' %}" style="color: white"><h3 class="neon__title_for_date">Attendance Display</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:student-attendance-record' %}" style="color: white"><h3 class="neon__title_for_date">Track Attendance</h3></a>
-                            </div>
-                        </div>
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---:---: || Attendance || :---:---:---:---</b></h1>
                     </div>
                 </div>
-            </article>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:take-attendance' %}" style="color: white"><h3
+                                class="neon__title_for_date">Take Attendance</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:batch-based-attendance' %}" style="color: white"><h3
+                                class="neon__title_for_date">Attendance Display</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:student-attendance-record' %}" style="color: white"><h3
+                                class="neon__title_for_date">Track Attendance</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
     <article
-                    style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <h1 class="neon__title"><b>---:---:---:---:--- Class Tests ---:---:---:---:---</b></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:take-exam' %}" style="color: white"><h3 class="neon__title_for_date">Take Exam</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:test-submissions' %}" style="color: white"><h3 class="neon__title_for_date">Submitted Test Papers</h3></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="neon__card_for_month" style="margin: 5px">
-                                <a href="{% url 'App_main:merit-list' %}" style="color: white"><h3 class="neon__title_for_date">Test Results</h3></a>
-                            </div>
-                        </div>
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---:---: || Routine || :---:---:---:---</b></h1>
                     </div>
                 </div>
-            </article>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:new-routine' %}" style="color: white"><h3
+                                class="neon__title_for_date">Publish New Routine</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:teachers-routine' %}" style="color: white"><h3
+                                class="neon__title_for_date">Routine Display</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---: || Notice-Board || :---:---:---</b></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:new-notice' %}" style="color: white"><h3
+                                class="neon__title_for_date">Publish a Notice</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:teacher-all-notices' %}" style="color: white"><h3
+                                class="neon__title_for_date">Notice Display</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article
+            style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title"><b>---:---:---:---:--- Class Tests ---:---:---:---:---</b></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:take-exam' %}" style="color: white"><h3 class="neon__title_for_date">
+                            Take Exam</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:test-submissions' %}" style="color: white"><h3
+                                class="neon__title_for_date">Submitted Test Papers</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <a href="{% url 'App_main:merit-list' %}" style="color: white"><h3 class="neon__title_for_date">
+                            Test Results</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
 
 
 {% endblock %}

@@ -1,15 +1,24 @@
-{% extends 'admins/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
-    Librarian-Signup
+    New Routine
 {% endblock %}
 
+{% block style %}
 
-{% block body %}
+{% endblock %}
+{% block group_name %}
+Teacher
+{% endblock %}
+
+{% block space %}
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
         @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+
+
 
 
         * {
@@ -34,6 +43,7 @@
             inset 5px 5px 20px 5px rgba(119, 119, 119, 0.3),
             inset -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
         }
+
 
 
         .top-text, .submit {
@@ -86,23 +96,17 @@
             box-shadow: 15px 15px 20px 5px rgba(119, 119, 119, 0.3),
             -15px -15px 20px 5px rgba(255, 255, 255, 0.8);
         }
-
-        #div_id_password1 ul li {
-            display: none;
-        }
-
         {#media screen#}
         @media screen and (max-width: 550px) {
-            .container {
-                margin-left: 3% !important;
-                padding-left: 3% !important;
+            .container{
+                margin-left: 3%!important;
+                padding-left: 3%!important;
             }
-
             body {
                 width: 100% !important;
             }
 
-            .form {
+            .form{
                 width: 95% !important;
                 margin-left: 0;
                 margin-right: 0;
@@ -122,19 +126,17 @@
 
 
     </style>
-
-    <div class="container" style="text-align: center; width: 1000px; height: fit-content">
-        <div class="container" STYLE="margin-left: 10%">
-            <form method="post" enctype="multipart/form-data" class="form">
-            <legend class="top-text"><b>Register New Librarian</b></legend>
+<div class="container" style="text-align: center; width: fit-content; height: fit-content; margin-top: 50px!important;">
+    <div class="container" STYLE="margin-left: 10%">
+        <form method="post" enctype="multipart/form-data" class="form">
+            <legend class="top-text"><b>New Notice</b></legend>
             {% csrf_token %}
-            {{ form1|crispy }}
-            {{ form2|crispy }}
+            {{ form|crispy }}
             <input type="submit" class="submit" value="Submit">
         </form>
-        </div>
-
     </div>
+
+</div>
 
 
     <script>

@@ -1,0 +1,122 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Routines
+{% endblock %}
+
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+        {#border: 1px solid #ddd;#} text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            color: white;
+        }
+
+        /*responsive*/
+
+        @media (max-width: 500px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+            }
+
+            .table td {
+                padding-left: 50%;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td a {
+                margin-left: auto;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            {% for semester in semesters %}
+                <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+
+                                <thead class="thead-dark">
+                                </thead>
+                                {% for r in routines %}
+                                    {% if r.semester == semester %}
+                                        <tbody>
+
+                                        <tr>
+                                            <td data-label="Routine">
+                                                <h1 class="neon__title">Dept: {{ r.department }} | Batch: {{ r.batch }}
+                                                    | Section: {{ r.section }} | Semester: {{ r.semester }}</h1>
+                                                <a class="neon__button" style="float: right; margin-bottom: 1%"
+                                                   href="{% url 'App_main:admin-delete-routine' pk=r.id %}"><i
+                                                        class="fa fa-trash-o"
+                                                        style="font-size:15px;color:white"></i></a>
+                                                <hr style="color: white">
+                                                <hr style="color: white">
+                                                <h1 class="neon__title">{{ r.created }}</h1>
+                                                <hr style="color: white">
+                                                <img src="{{ r.routine.url }}" height="600px" width="800px">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </article>
+
+
+{% endblock %}

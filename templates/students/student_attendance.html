@@ -1,0 +1,145 @@
+{% extends 'students/student_base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Assignments Submissions
+{% endblock %}
+
+{% block style %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 15px;
+        {#border: 1px solid #ddd;#} text-align: center;
+            font-size: 16px;
+        }
+
+        .table th {
+            color: #ffffff;
+        }
+
+        .table tbody tr {
+            color: white;
+        }
+
+        /*responsive*/
+
+        @media (max-width: 500px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+            }
+
+            .table td {
+                padding-left: 50%;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td a {
+                margin-left: auto;
+                text-align: left;
+                position: relative;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
+{% endblock %}
+{% block group_name %}
+    Teacher
+{% endblock %}
+
+{% block body %}
+<article style="background-color:#020318; height: fit-content!important; padding-bottom: 10px; padding-top: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="neon__card_for_month" style="margin: 5px">
+                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Attendance</b></a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            {% for semester, persent in semester_dict %}
+                <div class="row" style="margin: 1%">
+                    <div class="neon__card">
+
+                        <div class="container">
+                            <table class="table" style="color: white;  height: fit-content;">
+                                <h2 class="neon__title"
+                                    style="text-align: center; color: white;margin-top: 5px;">{{ semester }}
+                                    Semester</h2>
+                                {% for a, b in persent %}
+                                <p class="neon__title_for_date">Total Classes : {{ a }}</p>
+                                <p class="neon__title_for_date">Attendance : {{ b }}%</p>
+                                {% endfor %}
+
+                                <hr style="color: white">
+                                <hr style="color: white">
+
+                                <thead class="thead-dark">
+
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Date</th>
+                                    <th>Attendance</th>
+
+
+                                </tr>
+                                </thead>
+                                {% for attendance in s_attendance %}
+                                    {% if attendance.semester == semester %}
+                                        <tbody>
+
+                                        <tr>
+                                            <td data-label="Subject">{{ attendance.subject }}</td>
+                                            <td data-label="Date">{{ attendance.date }}</td>
+                                            {% if attendance.status == True %}
+                                                <td data-label="Status">Present</td>
+                                            {% else %}
+                                                <td data-label="ID">Absent</td>
+                                            {% endif %}
+                                        </tr>
+                                        </tbody>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </article>
+
+
+{% endblock %}

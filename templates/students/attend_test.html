@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'students/student_base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
 {% block title %}
-    Merit List
+    Tests
 {% endblock %}
 
 {% block style %}
@@ -83,68 +83,67 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="neon__card_for_month" style="margin: 5px">
-                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Tests</b></a>
-                        </h1>
+                        <h1 class="neon__title_for_routine"><a href="" style="text-decoration: none; color: white"><b>Tests</b></a></h1>
                     </div>
                 </div>
             </div>
-            {% for test,t_id in tests %}
+            {% for test in tests %}
                 <div class="row" style="margin: 1%">
                     <div class="neon__card">
-                        <script>
-                            let p_{{ t_id }} = 0;
-                            let d_{{ t_id }} = "$";
-                        </script>
+
                         <div class="container">
                             <table class="table" style="color: white;  height: fit-content;">
                                 <h2 class="neon__title"
-                                    style="text-align: center; color: white;margin-top: 5px;">{{ test }} </h2>
-                                <a class="neon__button" style="float: right; margin-bottom: 1%"
-                                   href="{% url 'App_main:delete-test' pk=test %}"><i
-                                        class="fa fa-trash-o" style="font-size:15px;color:white"></i></a>
+                                    style="text-align: center; color: white;margin-top: 5px;">{{ test|join:',' }} </h2>
+
                                 <hr style="color: white">
                                 <hr style="color: white">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Class</th>
-                                    <th>Subject</th>
-                                    <th>Name</th>
-                                    <th>Marks</th>
-                                    <th>Position</th>
+                                    <th>Deadline</th>
+                                    <th>Test Paper</th>
+                                    <th>Add Answer Sheet</th>
+                                    <th>Submit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for submission in submissions %}
-                                    {% if submission.my_test.Title == test %}
+                                    {% if submission.my_test.Title == test|join:',' %}
                                         <tr>
-                                            <td data-label="Class">{{ submission.identify }}</td>
-                                            <td data-label="Subject">{{ submission.my_test.subject }}</td>
-                                            <td data-label="Name">{{ submission.submitted_by.user.first_name }} {{ submission.submitted_by.user.last_name }}</td>
-                                            <td data-label="Marks">{{ submission.marks }}</td>
-                                            <td data-label="Position"><p id="p_id_{{ t_id }}_{{ submission.id }}"><span>0</span><span></span></p></td>
-                                        <script>
-                                                p_{{ t_id }} = parseInt(p_{{ t_id }});
-                                                p_{{ t_id }} += 1;
-                                                if (p_{{ t_id }} === 1) {
-                                                    d_{{ t_id }} = "st";
-                                                } else if (p_{{ t_id }} === 2) {
-                                                    d_{{ t_id }} = "nd";
-                                                } else if (p_{{ t_id }} === 3) {
-                                                    d_{{ t_id }} = "rd";
-                                                } else {
-                                                    d_{{ t_id }} = "th"
-                                                }
-                                                document.getElementById("p_id_{{ t_id }}_{{ submission.id }}").innerHTML = "<span id='s_id'>" + `${p_{{ t_id }}}` + "</span>" + "<span>" + `${d_{{ t_id }}}` + "</span>";
-                                            </script>
+                                            <td data-label="Deadline">{{ submission.my_test.deadline }}</td>
+                                            <td data-label="Test Paper"><a class="neon__button"
+                                                                               style="color: white; height: 37px!important; width: 100px!important; padding-top: 3%!important;"
+                                            href="http://{{ request.META.HTTP_HOST }}{{ submission.my_test.test_paper.url }}">
+                                                Open
+                                            </a></td>
+
+
+                                            <form method="post" enctype="multipart/form-data"
+                                                  action="{% url 'App_main:submit-test' pk=submission.id %}">
+                                                {% csrf_token %}
+                                                <td data-label="Marks">
+                                                    <input name="ans_file" type="file"
+                                                           style="height: 30px; width: fit-content; border-radius: 25%; border: 2px solid #77778d; background-color: #020318; color: white">
+                                                </td>
+                                                <td>
+                                                    <button type="submit" value="Submit" class="neon__button"
+                                                            style="color: white; height: 37px!important; width: fit-content!important; padding-top: 0!important;">
+                                                        <i class="fa fa-check" style="font-size:30px; color: white"></i>
+                                                    </button>
+                                                </td>
+                                            </form>
+
+
                                         </tr>
                                     {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
                         </div>
+
+
                     </div>
                 </div>
-
             {% endfor %}
         </div>
     </article>
