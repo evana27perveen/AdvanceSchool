@@ -9,7 +9,7 @@ gender_choice = (
 )
 
 teaching_status = (
-    ('Lecturer - pPermanent', 'Lecturer - Permanent'),
+    ('Lecturer - Permanent', 'Lecturer - Permanent'),
     ('Lecturer - Guest', 'Lecturer - Guest'),
     ('Lecturer & Department-Head', 'Lecturer & Department-Head'),
     ('Assistant-Lecturer', 'Assistant-Lecturer'),
@@ -74,7 +74,7 @@ class StudentModel(models.Model):
     section = models.CharField(choices=sec, max_length=10, default='Select One')
     tuition_fee = models.PositiveIntegerField()
     profile_picture = models.ImageField(upload_to='student_picture')
-    joining_date = models.DateField()
+    joining_date = models.DateField(auto_now=True)
     status = models.BooleanField(default=True)
 
     def __str__(self):

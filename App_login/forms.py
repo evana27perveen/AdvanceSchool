@@ -18,7 +18,7 @@ class TeacherForm(forms.ModelForm):
 
     class Meta:
         model = TeacherModel
-        exclude = ['user', 'joining_date', ]
+        exclude = ['user', 'joining_date', 'status']
 
 
 class StudentUserForm(auth_form.UserCreationForm):
@@ -33,7 +33,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = StudentModel
-        exclude = ['user', 'joining_date', ]
+        exclude = ['user', 'joining_date', 'status']
 
 
 class ParentUserForm(auth_form.UserCreationForm):
@@ -48,7 +48,7 @@ class ParentForm(forms.ModelForm):
 
     class Meta:
         model = ParentModel
-        exclude = ['user', ]
+        exclude = ['user', 'status']
 
 
 class StaffUserForm(auth_form.UserCreationForm):
@@ -63,7 +63,7 @@ class StaffForm(forms.ModelForm):
 
     class Meta:
         model = NonTeachingStaffModel
-        exclude = ['user', 'joining_date', ]
+        exclude = ['user', 'joining_date', 'status']
 
 
 class LibrarianUserForm(auth_form.UserCreationForm):
@@ -78,7 +78,7 @@ class LibrarianForm(forms.ModelForm):
 
     class Meta:
         model = LibrarianModel
-        exclude = ['user', 'joining_date', ]
+        exclude = ['user', 'joining_date', 'status']
 
 
 class AccountantUserForm(auth_form.UserCreationForm):
@@ -93,4 +93,4 @@ class AccountantForm(forms.ModelForm):
 
     class Meta:
         model = AccountantModel
-        exclude = ['user', 'joining_date', ]
+        exclude = ['user', 'joining_date', 'status']

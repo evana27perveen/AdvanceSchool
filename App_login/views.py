@@ -2,6 +2,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
 from django.shortcuts import render, HttpResponseRedirect, reverse
+
+from App_main.forms import StudentFeesModelForm
+from App_main.models import SalaryModel, StudentFeesModel
 from .models import *
 from .forms import *
 
@@ -22,6 +25,9 @@ def teacher_signup(request):
             my_form2.save()
             teacher_grp = Group.objects.get_or_create(name='TEACHER')
             teacher_grp[0].user_set.add(my_form1)
+            employee = TeacherModel.objects.get(user=my_form2.user)
+            salary = SalaryModel(user=employee.user, salary=employee.salary, position='Teacher')
+            salary.save()
             return HttpResponseRedirect(reverse('App_main:admin-dashboard'))
     return render(request, 'App_login/teacher_signup.html', context={'form1': form1, 'form2': form2})
 
@@ -29,18 +35,24 @@ def teacher_signup(request):
 def student_signup(request):
     form1 = StudentUserForm()
     form2 = StudentForm()
+    form3 = StudentFeesModelForm()
     if request.method == 'POST':
         form1 = StudentUserForm(data=request.POST)
         form2 = StudentForm(request.POST, request.FILES)
-        if form1.is_valid() and form2.is_valid():
+        form3 = StudentFeesModelForm(data=request.POST)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid():
             my_form1 = form1.save()
             my_form2 = form2.save(commit=False)
+            my_form3 = form3.save(commit=False)
             my_form2.user = my_form1
             my_form2.save()
             student_grp = Group.objects.get_or_create(name='STUDENT')
             student_grp[0].user_set.add(my_form1)
+            my_form3.user = my_form2
+            my_form3.tuition_fee = my_form2.tuition_fee
+            my_form3.save()
             return HttpResponseRedirect(reverse('App_main:admin-dashboard'))
-    return render(request, 'App_login/student_signup.html', context={'form1': form1, 'form2': form2})
+    return render(request, 'App_login/student_signup.html', context={'form1': form1, 'form2': form2, 'form3': form3})
 
 
 def parent_signup(request):
@@ -73,6 +85,9 @@ def staff_signup(request):
             my_form2.save()
             staff_grp = Group.objects.get_or_create(name='STAFF')
             staff_grp[0].user_set.add(my_form1)
+            employee = NonTeachingStaffModel.objects.get(user=my_form2.user)
+            salary = SalaryModel(user=employee.user, salary=employee.salary, position='Staff')
+            salary.save()
             return HttpResponseRedirect(reverse('App_main:admin-dashboard'))
     return render(request, 'App_login/staff_signup.html', context={'form1': form1, 'form2': form2})
 
@@ -90,6 +105,9 @@ def librarian_signup(request):
             my_form2.save()
             librarian_grp = Group.objects.get_or_create(name='LIBRARIAN')
             librarian_grp[0].user_set.add(my_form1)
+            employee = LibrarianModel.objects.get(user=my_form2.user)
+            salary = SalaryModel(user=employee.user, salary=employee.salary, position='Librarian')
+            salary.save()
             return HttpResponseRedirect(reverse('App_main:admin-dashboard'))
     return render(request, 'App_login/librarian_signup.html', context={'form1': form1, 'form2': form2})
 
@@ -107,6 +125,9 @@ def accountant_signup(request):
             my_form2.save()
             accountant_grp = Group.objects.get_or_create(name='ACCOUNTANT')
             accountant_grp[0].user_set.add(my_form1)
+            employee = AccountantModel.objects.get(user=my_form2.user)
+            salary = SalaryModel(user=employee.user, salary=employee.salary, position='Accountant')
+            salary.save()
             return HttpResponseRedirect(reverse('App_main:admin-dashboard'))
     return render(request, 'App_login/accountant_signup.html', context={'form1': form1, 'form2': form2})
 
@@ -128,13 +149,13 @@ def login_system(request):
                 elif request.user.groups.filter(name__in=['STUDENT']).exists():
                     return HttpResponseRedirect(reverse('App_main:student-dashboard'))
                 elif request.user.groups.filter(name__in=['ACCOUNTANT']).exists():
-                    return render(request, 'accountants/dashboard.html')
+                    return HttpResponseRedirect(reverse('App_main:accountant-dashboard'))
                 elif request.user.groups.filter(name__in=['PARENT']).exists():
-                    return render(request, 'parents/dashboard.html')
+                    return HttpResponseRedirect(reverse('App_main:parent-dashboard'))
                 elif request.user.groups.filter(name__in=['LIBRARIAN']).exists():
-                    return render(request, 'librarians/dashboard.html')
+                    return HttpResponseRedirect(reverse('App_main:librarian-dashboard'))
                 elif request.user.groups.filter(name__in=['STAFF']).exists():
-                    return render(request, 'staff/dashboard.html')
+                    return HttpResponseRedirect(reverse('App_main:staff-dashboard'))
                 else:
                     return HttpResponseRedirect(reverse('App_login:login'))
     return render(request, 'App_login/login.html', context={'form': form})
